@@ -1,4 +1,4 @@
-FROM node:18-alpine AS build_image
+FROM node:20-alpine AS build_image
 
 WORKDIR /app/react-app-blife
 
@@ -12,7 +12,7 @@ COPY . .
 
 RUN npm run build
 
-FROM node:18-alpine AS production_image
+FROM node:20-alpine AS production_image
 
 WORKDIR /app/react-app-blife
 
