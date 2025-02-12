@@ -8,12 +8,7 @@ export default {
 
     moduleNameMapper: {
         '\\.(gif|ttf|eot|svg|png)$': '<rootDir>/test/__ mocks __/fileMock.js',
+        "\\.(css|less|scss)$": "<rootDir>/test/__mocks__/styleMock.js"
     },
-    globals: {
-        'ts-jest': {
-          tsconfig: {
-            jsx: 'react-jsx',
-          },
-        },
-      },
+    
 }
