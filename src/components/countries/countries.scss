@@ -1,0 +1,38 @@
+.countryContainer {
+  width: fit-content;
+  height: 70px;
+  display: flex;
+  margin-inline-start: 50px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.listContainer {
+    margin: auto;
+    width: 600px;
+    height: 500px;
+    overflow-y: scroll;
+    background-color: rgb(238, 222, 200);
+}
+
+.listTitle {
+  margin-top: 60px;
+  font-size: 48px;
+  margin-bottom: 40px;
+  font-weight: bold;
+
+}
+
+.countryName {
+  font-size: 24px;
+  padding-top: 20px;
+}
+
+.smallFlag {
+  padding-inline-end: 20px;
+}
+
+.smallFlag img {
+  object-fit: cover;
+}
