@@ -1,16 +1,15 @@
 import { useEffect, useState, useRef } from 'react';
 import { Observable } from 'rxjs';
 import { List } from 'immutable'; // Importing List from Immutable.js
-import { CountryWithTimestamp } from '../types/countries'
+import { CountryData, CountryWithTimestamp } from '../types/countries'
 // Define the structure of the country object (without timestamp)
 
-import { CountryData } from '../types/countries'
 // Utility function to open IndexedDB and store countries
 const openDB = () => {
   return new Promise<IDBDatabase>((resolve, reject) => {
     const request = indexedDB.open('countriesDBAE', 1); // Renamed database here
 
-    request.onupgradeneeded = (e:any) => {
+    request.onupgradeneeded = (e: any) => {
       const db = e.target.result as IDBDatabase;
       if (!db.objectStoreNames.contains('countries')) {
         db.createObjectStore('countries', { keyPath: 'name.common' });
@@ -86,16 +85,16 @@ const useIndexedDB = () => {
 
   // Load countries from IndexedDB only once (on mount)
   const loadCountries = (db: IDBDatabase) => {
-    getCountriesFromDB(db).subscribe(
-      (countries) => {
+    getCountriesFromDB(db).subscribe({
+      next: (countries) => {
         setCountriesList(List(countries)); // Convert array to Immutable List
         setIsDBLoaded(true);
       },
-      (error) => {
+      error: (error) => {
         console.error('Error loading countries:', error);
         setIsDBLoaded(true); // Set to true to stop loading state even if error occurs
       }
-    );
+    });
   };
 
   // Handle adding a new country (timestamp is added here before saving)
@@ -107,14 +106,14 @@ const useIndexedDB = () => {
 
     if (!dbRef.current) return;
 
-    addCountryToDB(dbRef.current, countryWithTimestamp).subscribe(
-      () => {
-      
+    addCountryToDB(dbRef.current, countryWithTimestamp).subscribe({
+      next: () => {
+
       },
-      (error) => {
+      error: (error) => {
         console.error('Error adding country:', error);
       }
-    );
+    });
   };
 
   return {

@@ -41,6 +41,7 @@ export interface CountryDetailsProps {
   countriesList: List<CountryData>;
   isLoaded: boolean;
 }
+
 export interface CountryWithTimestamp extends CountryData {
   timestamp: string;
 }
