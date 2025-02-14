@@ -1,8 +1,5 @@
 @use '/variables';
-.root {
- 
 
-}
 .countryContainer {
 
   width: fit-content;
@@ -19,7 +16,7 @@
   
     margin: auto;
     width: 600px;
-    height: 500px;
+    height: 450px;
     overflow-y: scroll;
     background-color: variables.$lightGrey;
 }
