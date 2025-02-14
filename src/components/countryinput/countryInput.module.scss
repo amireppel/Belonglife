@@ -1,0 +1,31 @@
+@use '/variables';
+
+.container {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 30px;
+}
+
+.container input[type="text"] {
+  padding: 10px 50px 10px 10px;
+  font-size: 30px;
+  width: 300px;
+  border-radius: 5px;
+  border: 10px solid variables.$brown,
+}
+
+.container input[type="text"]:focus {
+  outline: none
+}
+
+.container button {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 30px;
+  color: variables.$darkGrey,
+}

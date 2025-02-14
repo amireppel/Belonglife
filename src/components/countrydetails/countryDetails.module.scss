@@ -1,0 +1,29 @@
+@use '/variables';
+
+.countryContainer {
+  padding-top: 100px;
+  margin: auto;
+}
+
+.countryName {
+  font-size: 40px;
+  padding-top: 30px;
+  padding-bottom: 10px;
+}
+
+.flag {
+  padding-top: 20px;
+  padding-bottom: 0px;
+}
+
+.flag img {
+  object-fit: cover;
+}
+
+.back {
+  margin-top: 0px;
+  font-size: 50px;
+  color: variables.$black;
+  font-weight: 200;
+  cursor: pointer;
+}

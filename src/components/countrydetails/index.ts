@@ -1,1 +1,1 @@
-export { default } from './countrydetails';
+export { default } from './countryDetails';

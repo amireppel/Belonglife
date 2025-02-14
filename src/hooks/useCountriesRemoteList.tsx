@@ -4,8 +4,8 @@ import { map } from 'rxjs/operators';
 import { List } from 'immutable';
 import { CountryData } from '../types/countries';
 
-const useCountries = () => {
-  const [countriesRemoteList, setCountries] = useState<List<CountryData>>(List());
+const useRemoteListCountries = () => {
+  const [remoteList, setCountries] = useState<List<CountryData>>(List());
   const [isRemoteLoaded, setIsRemoteLoaded] = useState<boolean>(false);
   const [isRemoteError, setError] = useState<boolean>(false);
 
@@ -38,8 +38,7 @@ const useCountries = () => {
     return () => subscription.unsubscribe();
   }, []);
 
-  return { countriesRemoteList, isRemoteLoaded, isRemoteError };
+  return { remoteList, isRemoteLoaded, isRemoteError };
 };
 
-export default useCountries;
-  
+export default useRemoteListCountries;

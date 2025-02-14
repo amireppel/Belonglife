@@ -4,7 +4,7 @@ export interface Flag {
   svg: string;
   alt: string;
 }
-  
+
 export interface CountryData {
   name: {
     common: string;
@@ -12,12 +12,35 @@ export interface CountryData {
   flags: Flag;
 }
 
-export interface CountriesListProps {
-  remoteListCountries: List<CountryData>; 
-  isRemoteLoaded: boolean; 
-  isRemoteError: boolean;       
+export interface RemoteCountriesListProps {
+  remoteList: List<CountryData>;
+  isRemoteLoaded: boolean;
+  isRemoteError: boolean;
 }
 
-export interface testType {
-  isRemoteLoaded: boolean;  
+export interface LocalCountriesListProps {
+  localList: List<CountryData>;
+  isLocalLoaded: boolean;
+}
+
+
+export interface FullCountriesListProps {
+  countriesList: List<CountryData>;
+  isLoaded: boolean;
+  isError: boolean;
+  selectCountryHandler: Function,
+}
+
+export interface DisplaySetUpProps {
+  localData: LocalCountriesListProps,
+  remoteData: RemoteCountriesListProps,
+  filter: string
+}
+
+export interface CountryDetailsProps {
+  countriesList: List<CountryData>;
+  isLoaded: boolean;
+}
+export interface CountryWithTimestamp extends CountryData {
+  timestamp: string;
 }

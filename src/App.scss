@@ -1,9 +1,10 @@
+@use '/variables';
 html {
   height: 100%;
 }
 body {
   height: 100%;
-  background-color: #e29945aa;
+  background-color: variables.$lightBrown;
 }
 
 #root {

@@ -1,31 +1,55 @@
+import { useState, useMemo } from "react";
+import { useNavigate } from "react-router";
+import { FullCountriesListProps, CountryData } from '../../types/countries';
+import CountryInput from "../countryInput";
 
-import { CountriesListProps, CountryData } from '../../types/countries';
+import theme from "./countries.module.scss";
 
-import './countries.scss'
+const Countries = ({ countriesList, isLoaded, isError, selectCountryHandler }: FullCountriesListProps) => {
 
-const Countries =  ({remoteListCountries,   isRemoteLoaded, isRemoteError }: CountriesListProps)=> {
-  /*const [count, setCount] = useState(0)*/
+  const listWithIds = useMemo(() =>
+    countriesList.map((item, index) => ({ ...item, keyIndex: index }))
+    /* this allows attributing unique id for country,
+    which will smoother use of the country flag page and display*/
+    , [countriesList]);
+
+  const navigate = useNavigate();
+  const [filter, setFilter] = useState('');
+  const filteredList = useMemo(() => (
+    listWithIds.filter((country => country.name.common.toLowerCase().includes(filter.toLocaleLowerCase()))))
+    , [listWithIds, filter])
+
+  if (isError) return <div className={theme.error}> Error while loading, check your internet connection</div>;
 
   return (
     <>
-      { !isRemoteLoaded ?
-         <div>
+      {!isLoaded ?
+        <div className={theme.loading}>
           Loading...
-         </div>   
-         : 
-         <>
-        <div className="listTitle">  Select a country: </div>
-     
-        <div className="listContainer" >
-        { remoteListCountries.map((country:CountryData, index: number ) => 
-          <div className="countryContainer" key={index}>
-          
-          <div className="smallFlag">    <img  width="50px" height="50px" src={country.flags.svg} alt={country.flags.alt} /> </div>
-          <div className="countryName"> {country.name.common}</div>
-          </div>
-        ) }
-        
         </div>
+        :
+        <>
+          <div className={theme.listTitle} >  Select a country: </div>
+          {<CountryInput filter={filter} setFilter={setFilter} />}
+          <div className={theme.listContainer} >
+            {filteredList.map((country: CountryData, keyIndex: number) =>
+              <div
+                className={theme.countryContainer} key={keyIndex}
+                onClick={() => {
+                  selectCountryHandler(country, navigate, keyIndex);
+                }}
+              >
+                {country.flags.svg ?
+                  <div className={theme.smallFlag}>
+                    <img width="50px" height="50px" src={country.flags.svg} alt={country.flags.alt} />
+                  </div>
+                  :
+                  <div className={theme.defaultFlag} ><span> &#127757;  </span></div>
+                }
+                <div className={theme.countryName}> {country.name.common}</div>
+              </div>
+            )}
+          </div>
         </>
       }
     </>

@@ -1,4 +1,10 @@
+@use '/variables';
+.root {
+ 
+
+}
 .countryContainer {
+
   width: fit-content;
   height: 70px;
   display: flex;
@@ -6,14 +12,16 @@
   margin-top: 20px;
   margin-bottom: 20px;
   cursor: pointer;
+ 
 }
 
 .listContainer {
+  
     margin: auto;
     width: 600px;
     height: 500px;
     overflow-y: scroll;
-    background-color: rgb(238, 222, 200);
+    background-color: variables.$lightGrey;
 }
 
 .listTitle {
@@ -21,12 +29,15 @@
   font-size: 48px;
   margin-bottom: 40px;
   font-weight: bold;
-
 }
 
 .countryName {
   font-size: 24px;
   padding-top: 20px;
+  max-width: 400px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .smallFlag {
@@ -36,3 +47,27 @@
 .smallFlag img {
   object-fit: cover;
 }
+
+.error {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: variables.$redError;
+  font-size: 30px;
+}
+
+.loading {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 30px;
+}
+
+.defaultFlag{
+  height: 50px;
+  width: 50px;
+  font-size: 40px;
+}
+

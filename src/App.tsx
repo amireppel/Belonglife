@@ -1,38 +1,56 @@
-import { useEffect } from 'react';
-import { BrowserRouter, Routes, Route , Navigate} from "react-router";
+import { useCallback } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 
 import Countries from './components/countries';
-import CountryDetails from './components/countrydetails';
-import UseCountriesRemoteList from './hooks/useCountriesRemoteList';
+import CountryDetails from './components/countryDetails';
+import useCountriesRemoteList from './hooks/useCountriesRemoteList';
+import useLocalListCountries from './hooks/useCountriesLocalList';
+import useDisplayListCountries from './hooks/useCountriesDisplayList';
+import { CountryData } from './types/countries';
 
 import './App.scss'
 
 function App() {
 
-  const { isRemoteLoaded ,countriesRemoteList, isRemoteError } = UseCountriesRemoteList();
-  useEffect(()=>{
- 
-  }, [])
+  const remoteData = useCountriesRemoteList();
+  const { localData, addCountryToList } = useLocalListCountries();
+
+  const { isfinaliesd, isError, displayList } = useDisplayListCountries({
+    remoteData,
+    localData,
+    filter: '',
+  });
+
+  const countryClickHandler = useCallback((countryData: CountryData, navigate: Function, idIndex: number) => {
+    addCountryToList(countryData, navigate, idIndex)
+  }, [displayList, addCountryToList])
+
   return (
     <>
-      <div>
-
-      </div>
       <BrowserRouter>
         <Routes>
-
-          <Route path="countries"
-                 element={
-                  <Countries
-                    remoteListCountries={ countriesRemoteList  }
-                    isRemoteError={ isRemoteError }
-                    isRemoteLoaded={ isRemoteLoaded }
-                  />}
+          <Route
+            path="countries"
+            element={
+              <Countries
+                countriesList={displayList}
+                isError={isError}
+                isLoaded={isfinaliesd}
+                selectCountryHandler={countryClickHandler}
+              />
+            }
           />
-          <Route path="countries/:id" element={< CountryDetails />} />
+          <Route
+            path="countries/:id"
+            element={
+              <CountryDetails
+                countriesList={displayList}
+                isLoaded={isfinaliesd}
+              />
+            }
+          />
           <Route path="*" element={<Navigate to="countries" />} />
-
-          </Routes>
+        </Routes>
       </BrowserRouter>
     </>
 
