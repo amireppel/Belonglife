@@ -9,6 +9,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { List } from 'immutable';
 import Countries from '../src/components/countries';
 
+
 describe('Countries component', () => {
   const mockCountries = List([
     { name: { common: 'United States' }, flags: { svg: 'http://somwhere', alt: 'some flag' } },
@@ -77,7 +78,7 @@ describe('Countries component', () => {
       expect(screen.queryByText(country?.name?.common)).not.toBeInTheDocument();
     });
   });
-  it('checks filter behaiour', () => {
+  it('checks filter behaviour', () => {
     render(
       <BrowserRouter>
         <Routes>
@@ -93,15 +94,16 @@ describe('Countries component', () => {
     );
 
     const input = screen.getByTestId('search-input');
-    fireEvent.change(input, { target: { value: 'n' } });
+    fireEvent.change(input, { target: { value: 's' } });
 
     // Check that only the countries containing 'un' are visible
-    expect(screen.getByText('China')).toBeInTheDocument();
+    expect(screen.queryAllByText("China")).toHaveLength(0)
 
     expect(screen.getByText('United States')).toBeInTheDocument();
 
     // Ensure countries not matching are not visible
-    expect(screen.queryByText('Israel')).not.toBeInTheDocument();
+    expect(screen.queryByText('Israel')).toBeInTheDocument();
 
   });
+
 });
