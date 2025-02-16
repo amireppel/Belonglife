@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router";
 import { FullCountriesListProps } from '../../types/countries';
-import CountryInput from "../countryInput";
+import CountryInput from "../countryinput";
 
 import theme from "./countries.module.scss";
 

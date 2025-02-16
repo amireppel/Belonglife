@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 
 import Countries from './components/countries';
-import CountryDetails from './components/countryDetails';
+import CountryDetails from './components/countrydetails';
 import useCountriesRemoteList from './hooks/useCountriesRemoteList';
 import useLocalListCountries from './hooks/useCountriesLocalList';
 import useDisplayListCountries from './hooks/useCountriesDisplayList';
